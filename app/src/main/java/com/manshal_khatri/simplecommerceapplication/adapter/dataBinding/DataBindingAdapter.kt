@@ -1,0 +1,2 @@
+package com.manshal_khatri.simplecommerceapplication.adapter.dataBinding
+

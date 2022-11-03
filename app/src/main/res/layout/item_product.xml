@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="192dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/ivProduct"
+            android:layout_width="156dp"
+            android:layout_height="192dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/ShapeAppearanceOverlay.Material3.Chip" />
+
+        <LinearLayout
+            android:id="@+id/textContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingVertical="8dp"
+            android:layout_marginBottom="56dp"
+            app:layout_constraintStart_toEndOf="@id/ivProduct">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:layout_marginVertical="4dp"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/design_default_color_on_secondary"
+                android:layout_marginVertical="4dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnAddToBasket"
+            android:layout_width="164dp"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="12dp"
+            android:background="@drawable/button_background"
+            app:layout_constraintTop_toBottomOf="@id/textContainer"
+            app:layout_constraintStart_toEndOf="@id/ivProduct">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCart"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:foreground="@drawable/ic_cart"
+                android:foregroundTint="@color/white"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:text="@string/add_to_basket"
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:background="@drawable/transparent_background"
+                />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

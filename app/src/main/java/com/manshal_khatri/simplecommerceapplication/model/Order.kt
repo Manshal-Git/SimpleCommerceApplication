@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-class Order (
+data class Order (
     @PrimaryKey
     val productIds : List<Int>,
     val quantityList : List<Int>,

@@ -18,13 +18,17 @@ class UserBasketFragment : Fragment() {
     lateinit var mVM : OrdersViewModel
     lateinit var mBasket : Basket
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mVM.setupRepository(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_user_basket, container, false)
         binding = FragmentUserBasketBinding.bind(view)
-
         if(mVM.basket.value?.isEmpty() == true){
             mBasket.let { mVM.setBasketItems(it.itemIds) }
         }

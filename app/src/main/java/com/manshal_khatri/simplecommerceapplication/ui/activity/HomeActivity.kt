@@ -8,16 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.manshal_khatri.simplecommerceapplication.adapter.recyclerView.ProductsAdapter
 import com.manshal_khatri.simplecommerceapplication.databinding.ActivityHomeBinding
 import com.manshal_khatri.simplecommerceapplication.model.Basket
-import com.manshal_khatri.simplecommerceapplication.model.Product
 import com.manshal_khatri.simplecommerceapplication.model.StoreDetail
 import com.manshal_khatri.simplecommerceapplication.util.Constants
 import com.manshal_khatri.simplecommerceapplication.util.Functions
 import com.manshal_khatri.simplecommerceapplication.viewmodel.HomeViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-
-val productList = mutableListOf<Product>()
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding : ActivityHomeBinding
@@ -27,6 +21,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         vm = ViewModelProvider(this)[HomeViewModel::class.java]
+        vm.setupRepository(this)
 
         with(binding){
             vm.storeDetail.observe(this@HomeActivity) {
@@ -41,15 +36,14 @@ class HomeActivity : AppCompatActivity() {
                     )
                 }
             }
-        }
-        vm.product.observe(this@HomeActivity){
-            binding.rvProducts.adapter = ProductsAdapter(vm)
-        }
-        with(vm) {
-            CoroutineScope(Dispatchers.Main).launch {
-                getStoreDetails()
-                getProducts()
+            vm.product.observe(this@HomeActivity){
+                rvProducts.adapter = ProductsAdapter(vm)
             }
+        }
+
+        with(vm) {
+            getStoreDetails()
+            getProducts()
         }
     }
     private fun setupStoreDetails(storeDetails : StoreDetail){
@@ -61,4 +55,5 @@ class HomeActivity : AppCompatActivity() {
             }
         }
     }
+
 }

@@ -26,6 +26,7 @@ class HomeActivity : AppCompatActivity() {
         with(binding){
             vm.storeDetail.observe(this@HomeActivity) {
                 setupStoreDetails(it)
+
             }
             rvProducts.layoutManager = LinearLayoutManager(this@HomeActivity)
             ivMyBasket.setOnClickListener {

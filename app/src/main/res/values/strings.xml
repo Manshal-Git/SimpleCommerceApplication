@@ -12,4 +12,5 @@
     <string name="order_summary">Order Summary</string>
     <string name="lbl_store_owner">Store Owner :</string>
     <string name="lbl_store_address">Store Address :\n</string>
+    <string name="empty_basket">Empty Basket !</string>
 </resources>

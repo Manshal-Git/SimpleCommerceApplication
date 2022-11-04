@@ -24,13 +24,6 @@ class OrdersViewModel : ViewModel() {
     }
 
     fun setBasketItems(list : List<Int>){
-        /*val productList = productList
-        clearBasket()
-        productList.forEach {
-            if(list.contains(it.id)){
-                _basket.value?.add(BasketItem(it, totalPrice = it.price))
-            }
-        }*/
         clearBasket()
         list.forEach { it ->
             val response = repository.fetchProductById(it)

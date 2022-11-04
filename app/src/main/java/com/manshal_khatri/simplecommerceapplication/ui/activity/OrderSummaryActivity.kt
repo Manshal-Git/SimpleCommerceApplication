@@ -11,6 +11,7 @@ import com.manshal_khatri.simplecommerceapplication.model.Basket
 import com.manshal_khatri.simplecommerceapplication.ui.fragment.OrderSummaryFragment
 import com.manshal_khatri.simplecommerceapplication.ui.fragment.UserBasketFragment
 import com.manshal_khatri.simplecommerceapplication.util.Constants
+import com.manshal_khatri.simplecommerceapplication.util.Functions
 import com.manshal_khatri.simplecommerceapplication.util.NavAction
 import com.manshal_khatri.simplecommerceapplication.viewmodel.OrdersViewModel
 
@@ -26,13 +27,21 @@ class OrderSummaryActivity : AppCompatActivity() {
         res = this.resources
         vm = ViewModelProvider(this)[OrdersViewModel::class.java]
         mBasket = intent.getSerializableExtra(Constants.KEY_BASKET) as Basket
-        replaceFragment(NavAction.MyBasketScreen)
-        setupNavButton()
+        if(mBasket.itemIds.isNotEmpty()){
+            replaceFragment(NavAction.MyBasketScreen)
+            setupNavButton()
 
-        // Observers
-        vm.totalAmount.observe(this){
-            binding.tvAmount.text = "₹ $it"
+            // Observers
+            vm.totalAmount.observe(this){
+                binding.tvAmount.text = "₹ $it"
+            }
+            vm.basket.observe(this){
+                Functions.makeViewGone(binding.noItemsLayout)
+            }
+        }else{
+            onEmptyBasketSetup()
         }
+
     }
 
     fun replaceFragment(navMode: NavAction){
@@ -66,6 +75,12 @@ class OrderSummaryActivity : AppCompatActivity() {
         }
     }
 
+    fun onEmptyBasketSetup(){
+        Functions.makeViewVisible(binding.noItemsLayout)
+        binding.btnBackToProducts.setOnClickListener {
+            onBackPressed()
+        }
+    }
     override fun onBackPressed() {
         super.onBackPressed()
         if(supportFragmentManager.backStackEntryCount==0) finish()

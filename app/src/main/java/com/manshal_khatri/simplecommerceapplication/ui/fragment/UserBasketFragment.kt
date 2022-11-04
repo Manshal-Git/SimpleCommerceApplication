@@ -3,6 +3,7 @@ package com.manshal_khatri.simplecommerceapplication.ui.fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -37,6 +38,9 @@ class UserBasketFragment : Fragment() {
             rvBasketItems.adapter = BasketAdapter(mVM)
             mVM.basket.observe(viewLifecycleOwner){
                 rvBasketItems.adapter = BasketAdapter(mVM)
+                if(it.isNotEmpty()){
+                    loader.root.visibility = GONE
+                }
             }
             rvBasketItems.layoutManager = LinearLayoutManager(requireActivity())
         }

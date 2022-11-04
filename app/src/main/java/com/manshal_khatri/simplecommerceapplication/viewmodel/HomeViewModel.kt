@@ -9,7 +9,6 @@ import com.manshal_khatri.simplecommerceapplication.model.StoreDetail
 import com.manshal_khatri.simplecommerceapplication.model.server_response.ResponseProducts
 import com.manshal_khatri.simplecommerceapplication.model.server_response.ResponseStoreDetails
 import com.manshal_khatri.simplecommerceapplication.repository.Repository
-import com.manshal_khatri.simplecommerceapplication.util.LiveDataCode
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +22,6 @@ class HomeViewModel : ViewModel() {
     val product : LiveData<List<Product>> get() = _products
     private val _basket = MutableLiveData<MutableList<Int>>(mutableListOf())
     val basket : LiveData<MutableList<Int>> get() = _basket
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading : LiveData<Boolean> get() = _isLoading
 
     fun setupRepository(context : Context){
         repository = Repository(context)
@@ -73,14 +70,5 @@ class HomeViewModel : ViewModel() {
     }
     fun removeFromBasket(productId : Int){
         _basket.value?.remove(productId)
-    }
-    fun setLoadingStatus(loading : Boolean){
-        _isLoading.value = loading
-    }
-    private fun refreshLiveData(code : LiveDataCode){
-        when(code){
-            LiveDataCode.StoreDetails -> _storeDetails.postValue(_storeDetails.value)
-            else -> {}
-        }
     }
 }

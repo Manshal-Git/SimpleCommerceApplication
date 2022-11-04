@@ -41,7 +41,7 @@ class OrderAdapter(private val vm : OrdersViewModel) : RecyclerView.Adapter<Orde
         with(basketItem){
             setImage(product.imageUrl,holder.image)
             holder.name.text = product.name
-            setTotalPrice("$totalPrice")
+            setTotalPrice(" ₹ $totalPrice")
             setQty("$quantity")
             totalAmount+=totalPrice
         }

@@ -4,12 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.manshal_khatri.simplecommerceapplication.model.Basket
+import androidx.room.TypeConverters
+import com.manshal_khatri.simplecommerceapplication.model.Order
 import com.manshal_khatri.simplecommerceapplication.model.Product
 import com.manshal_khatri.simplecommerceapplication.model.StoreDetail
 
 
-@Database(entities = [Product::class,Basket::class,StoreDetail::class], version = 1)
+@Database(entities = [Product::class,Order::class,StoreDetail::class], version = 1)
+@TypeConverters(RoomConvertors::class)
 abstract class SimpleCommerceDB : RoomDatabase() {
 
     abstract fun storeDao() : StoreDao

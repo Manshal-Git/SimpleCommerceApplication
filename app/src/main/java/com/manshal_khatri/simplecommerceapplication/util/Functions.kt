@@ -8,8 +8,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 
 object Functions {
-    fun setUpTextView(tv : TextView,text : String){
-        tv.text = text
+    fun appendToTextView(tv : TextView, text : String){
+        tv.text = tv.text.toString() + text
     }
     fun setImage(imgUrl : String,imageView : ImageView,){
         Glide.with(imageView.context).load(imgUrl).into(imageView)

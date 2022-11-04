@@ -34,28 +34,42 @@ class BasketAdapter(private val vm : OrdersViewModel) : RecyclerView.Adapter<Bas
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val basketItem = basketItemsList[position]
         fun setQty(qty:String){
-            holder.quantity.text = qty
+            holder.quantity.text = "Qty $qty"
         }
         fun setTotalPrice(price : String){
-            holder.price.text = price
+            holder.price.text = "₹ $price"
         }
 
         with(basketItem){
+            fun reduceQuantity(){
+                vm.reduceQty(product.id)
+                setQty("${quantity}")
+                totalPrice = product.price*quantity
+                setTotalPrice("$totalPrice")
+                vm.setTotalAmount(vm.totalAmount.value?.minus(product.price) ?: 0f)
+            }
+
+            fun enableReduceButton(enabled : Boolean){
+                if(enabled) holder.minusQty.setOnClickListener {
+                    reduceQuantity()
+                    if(quantity==1) enableReduceButton(false)
+                }
+                else{
+                    holder.minusQty.apply {
+                        setOnClickListener { }
+                    }
+                }
+            }
             Functions.setImage(product.imageUrl, holder.image)
             holder.name.text = product.name
             setTotalPrice("$totalPrice")
             setQty("$quantity")
             totalAmount+=totalPrice
-            holder.minusQty.setOnClickListener {
-                vm.reduceQty(product.id)
-                setQty("${quantity}")
-                totalPrice = product.price*quantity
-                setTotalPrice("${totalPrice}")
-                vm.setTotalAmount(vm.totalAmount.value?.minus(product.price) ?: 0f)
-            }
+            enableReduceButton(false)
             holder.plusQty.setOnClickListener {
                 vm.plusQty(product.id)
                 setQty("${quantity}")
+                if(quantity>1) enableReduceButton(true)
                 totalPrice = product.price*quantity
                 setTotalPrice("${totalPrice}")
                 vm.setTotalAmount(vm.totalAmount.value?.plus(product.price) ?: 0f)

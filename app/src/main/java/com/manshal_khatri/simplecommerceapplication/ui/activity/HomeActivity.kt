@@ -55,9 +55,9 @@ class HomeActivity : AppCompatActivity() {
     private fun setupStoreDetails(storeDetails : StoreDetail){
         with(storeDetails){
             with(Functions){
-                setUpTextView(binding.tvStoreName,storeName)
-                setUpTextView(binding.tvOwner,owner)
-                setUpTextView(binding.tvAddress,address)
+                appendToTextView(binding.tvStoreName,storeName)
+                appendToTextView(binding.tvOwner,owner)
+                appendToTextView(binding.tvAddress,address)
             }
         }
     }

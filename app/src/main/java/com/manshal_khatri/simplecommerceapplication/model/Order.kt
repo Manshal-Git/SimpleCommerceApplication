@@ -4,10 +4,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class Product(
+class Order (
     @PrimaryKey
-    val id : Int,
-    val name : String,
-    val price : Float,
-    val imageUrl : String
+    val productIds : List<Int>,
+    val quantityList : List<Int>,
+    val productPriceList : List<Float>
 )
